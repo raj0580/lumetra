@@ -3,22 +3,30 @@
 
 /* 
   ==============================================
-  VIBRANT & COLORFUL LUMETRA THEME
+  LUMETRA OFFICIAL DESIGN SYSTEM
   ==============================================
 */
 :root {
-    --lumetra-blue: #4263EB;
-    --lumetra-orange: #FF7A59;
-    --primary-gradient: linear-gradient(90deg, var(--lumetra-blue) 0%, #5A8DFF 100%);
-    --secondary-gradient: linear-gradient(90deg, var(--lumetra-orange) 0%, #FF9A8B 100%);
-    --dark-color: #121826;
-    --light-color: #f8f9fa;
-    --text-color: #343a40;
-    --text-muted: #6c757d;
+    /* ✅ Primary Colors from Your Palette */
+    --brand-blue: #2D6FE8;
+    --accent-orange: #FF7E41;
+    --accent-red: #FF4B5C;
+
+    /* ✅ Gradient Accent from Your Palette */
+    --accent-gradient: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-orange) 100%);
+
+    /* ✅ Secondary Colors from Your Palette */
+    --bg-light: #F8F9FB;
+    --text-dark: #1F2D3D;
+    
+    /* ✅ Additional Accents from Your Palette */
+    --highlight-warm: #FF6F61;
+    
+    /* UI Variables */
     --font-family: 'Poppins', sans-serif;
-    --border-radius: 16px; /* Even softer corners */
-    --shadow: 0px 8px 24px rgba(66, 99, 235, 0.08);
-    --shadow-hover: 0px 12px 28px rgba(66, 99, 235, 0.15);
+    --border-radius: 12px;
+    --shadow-soft: 0px 8px 24px rgba(31, 45, 61, 0.07);
+    --shadow-hover: 0px 12px 28px rgba(31, 45, 61, 0.1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,174 +34,168 @@
 body {
     font-family: var(--font-family);
     line-height: 1.7;
-    background-color: #FFFFFF;
-    color: var(--text-color);
+    background-color: var(--bg-light); /* ✅ Using your specified background color */
+    color: var(--text-dark); /* ✅ Using your specified text color */
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden; /* Prevent horizontal scroll from decorative elements */
-}
-
-/* Add a subtle decorative glow to the background */
-body::before {
-    content: '';
-    position: fixed;
-    top: -20vh;
-    right: -20vw;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, rgba(66, 99, 235, 0.1), transparent 70%);
-    z-index: -1;
-    pointer-events: none;
 }
 
 .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
 
-/* HEADER & FOOTER */
-header { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); padding: 1.5rem 0; border-bottom: 1px solid #dee2e6; position: sticky; top: 0; z-index: 100; }
+/* 
+  ==============================================
+  HEADER (BRAND BLUE)
+  ==============================================
+*/
+header {
+    background: var(--brand-blue); /* ✅ Header is now your brand blue */
+    padding: 1.25rem 0;
+    border-bottom: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 header nav { display: flex; justify-content: space-between; align-items: center; }
-header .logo { font-size: 1.8rem; font-weight: 800; color: var(--lumetra-blue); text-decoration: none; }
+header .logo { font-size: 1.8rem; font-weight: 800; color: #FFFFFF; text-decoration: none; }
 header ul { list-style: none; display: flex; align-items: center; }
-header ul li a { padding: 0.5rem 1.25rem; text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; }
-header ul li a:hover { color: var(--primary-gradient); }
+header ul li a {
+    padding: 0.5rem 1.25rem;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85); /* White links for contrast */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+header ul li a:hover { color: #FFFFFF; }
 
-footer { background: var(--dark-color); color: var(--light-color); text-align: center; padding: 4rem 0; margin-top: 5rem; }
+
+/* FOOTER */
+footer { background: var(--text-dark); color: var(--bg-light); text-align: center; padding: 4rem 0; margin-top: 5rem; }
 footer .container { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
-footer .social-links a { color: var(--light-color); text-decoration: none; margin: 0 1rem; font-weight: 500; }
+footer .social-links a { color: var(--bg-light); text-decoration: none; margin: 0 1rem; font-weight: 500; }
 
 
 /* GENERAL SECTIONS & TYPOGRAPHY */
-section { padding: 6rem 0; position: relative; }
-section h2 { text-align: center; font-size: 3rem; font-weight: 700; margin-bottom: 4rem; color: var(--dark-color); }
-.page-header { text-align: center; padding: 4rem 0; }
-.page-header h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; }
-.page-header p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+section { padding: 5rem 0; }
+section h2 { text-align: center; font-size: 3rem; font-weight: 700; margin-bottom: 3.5rem; color: var(--text-dark); }
 
-/* HERO SECTION - BOLD & BRANDED */
-.hero-section { background: var(--light-color); text-align: center; padding: 8rem 0; }
-.hero-logo { font-size: 8rem; font-weight: 800; color: var(--lumetra-blue); line-height: 1; margin-bottom: 1.5rem; }
-.hero-section .tagline { font-size: 2rem; font-weight: 500; color: var(--text-muted); }
 
-/*
+/* 
   ==============================================
-  VIBRANT, CLICKABLE SERVICE CARDS
+  HERO SECTION (CLEAN & ON-BRAND)
   ==============================================
 */
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+.hero-section { background: none; text-align: center; padding: 7rem 0; }
+.hero-logo { font-size: 7rem; font-weight: 800; color: var(--brand-blue); line-height: 1; margin-bottom: 1.5rem; }
+.hero-section .tagline { font-size: 1.75rem; font-weight: 500; color: var(--text-muted); }
+
+
+/* 
+  ==============================================
+  SERVICE CARDS (NEW PROFESSIONAL STYLE)
+  ==============================================
+*/
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
 
 .service-card {
     display: block;
     text-decoration: none;
-    color: var(--dark-color);
-    background: #FFFFFF;
+    background: #FFFFFF; /* ✅ Using your specified card background */
     padding: 2.5rem;
     border-radius: var(--border-radius);
-    border: 1px solid #e9ecef;
-    box-shadow: var(--shadow);
+    border: 1px solid #EAECEF;
+    box-shadow: var(--shadow-soft);
+    text-align: left; /* More professional alignment */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--brand-blue); /* Highlight with blue on hover */
+}
+/* New icon style */
+.service-card::before {
+    content: '★'; /* Placeholder icon */
+    display: block;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: var(--bg-light);
+    color: var(--brand-blue);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
 }
 .service-card h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--dark-color);
-    position: relative; /* For the gradient text effect */
-    z-index: 2;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
 }
 .service-card p {
     font-size: 1rem;
     line-height: 1.6;
     color: var(--text-muted);
-    position: relative;
-    z-index: 2;
-    transition: color 0.4s ease;
-}
-
-/* The magic gradient reveal on hover */
-.service-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--primary-gradient);
-    z-index: 1;
-    transform: translateY(101%); /* Start hidden at the bottom */
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.service-card:hover {
-    transform: translateY(-12px);
-    box-shadow: var(--shadow-hover);
-}
-.service-card:hover::after {
-    transform: translateY(0); /* Reveal the gradient */
-}
-.service-card:hover h3,
-.service-card:hover p {
-    color: #FFFFFF; /* Make text white on hover */
 }
 
 
 /* PROJECT CARDS */
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-.project-card { background: #FFFFFF; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.project-card { background: #FFFFFF; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-soft); transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
 .project-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
 .project-card-content { padding: 1.5rem; }
-.project-card-content h3 { margin-bottom: 0.5rem; font-weight: 600; }
+.project-card-content h3 { margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark); }
 
-/* === VIBRANT GRADIENT BUTTONS & CTA === */
+
+/* 
+  ==============================================
+  BUTTONS & CTA (GRADIENT ACCENT)
+  ==============================================
+*/
 .btn {
     display: inline-block;
     padding: 1rem 2.5rem;
-    background: var(--primary-gradient);
+    background: var(--accent-gradient); /* ✅ Using your specified gradient */
     color: #fff;
     border: none;
-    border-radius: 50px; /* Pill shape */
+    border-radius: 50px;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(66, 99, 235, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
     transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 .btn:hover {
     transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(66, 99, 235, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 111, 97, 0.4);
 }
 
-/* --- VIBRANT CTA SECTION --- */
+/* CTA Section */
 .cta-section {
-    padding: 6rem 2rem;
-    background: var(--primary-gradient);
-    color: #fff;
+    padding: 5rem 2rem;
+    background: #FFFFFF; /* Clean white CTA background */
     text-align: center;
     border-radius: var(--border-radius);
     margin: 0 auto;
     max-width: 1140px;
 }
-.cta-section h2 { color: #fff; }
-.cta-section .btn {
-    background: #FFFFFF;
-    color: var(--lumetra-blue);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
+.cta-section h2 { color: var(--text-dark); }
 
-/* === POLISHED ADMIN PANEL === */
+
+/* ADMIN PANEL STYLES */
 .admin-panel { padding: 2rem 0; }
-.admin-section { padding: 2.5rem; background: var(--light-color); border-radius: var(--border-radius); margin-bottom: 3rem; }
+.admin-section { padding: 2.5rem; background: #FFFFFF; border-radius: var(--border-radius); margin-bottom: 3rem; }
 .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 0 1rem;}
 .admin-form { max-width: 100%; margin: 0; display: flex; flex-direction: column; gap: 1.25rem; }
 .admin-form input, .admin-form textarea, .admin-form select { width: 100%; padding: 1rem; font-size: 1rem; border: 1px solid #ced4da; border-radius: 8px; font-family: var(--font-family); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-.admin-form input:focus, .admin-form textarea:focus, .admin-form select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(66, 99, 235, 0.2); }
+.admin-form input:focus, .admin-form textarea:focus, .admin-form select:focus { outline: none; border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(45, 111, 232, 0.2); }
 .list-container { margin-top: 2rem; }
 .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #fff; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 1rem; }
 .admin-item button { margin-left: 0.5rem; padding: 0.5rem 1rem; border-radius: 8px;}
-.admin-item p { font-weight: 500; }
-.btn.btn-secondary { background: var(--secondary-gradient); }
-.btn-danger { background-color: #e03131; }
+.btn.btn-secondary { background: var(--text-muted); box-shadow: none; }
+.btn-danger { background: #e03131; box-shadow: none;}
+
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
@@ -201,5 +203,4 @@ section h2 { text-align: center; font-size: 3rem; font-weight: 700; margin-botto
     .hero-logo { font-size: 4.5rem; }
     .hero-section .tagline { font-size: 1.25rem; }
     section h2 { font-size: 2.2rem; }
-    footer .container { flex-direction: column; gap: 1.5rem; }
 }
