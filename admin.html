@@ -10,44 +10,68 @@
     <div id="header-placeholder"></div>
 
     <main class="container admin-panel">
-        <h1>Admin Panel</h1>
-
-        <!-- Login Form -->
+        <!-- Login Form (Initially Visible) -->
         <div id="login-view">
-            <h2>Login</h2>
+            <h1>Admin Panel</h1>
             <form id="login-form" class="admin-form">
+                <h2>Login</h2>
                 <input type="email" id="login-email" placeholder="Email" required>
                 <input type="password" id="login-password" placeholder="Password" required>
                 <button type="submit" class="btn">Login</button>
             </form>
         </div>
 
-        <!-- Admin Dashboard (hidden by default) -->
+        <!-- Admin Dashboard (Hidden by default) -->
         <div id="dashboard-view" style="display: none;">
             <div class="dashboard-header">
-                <h2>Welcome, Admin!</h2>
+                <h1>Admin Dashboard</h1>
                 <button id="logout-btn" class="btn btn-secondary">Logout</button>
             </div>
 
-            <!-- Add/Edit Project Form -->
-            <div class="form-container">
-                <h3>Manage Projects</h3>
-                <form id="project-form" class="admin-form">
-                    <input type="hidden" id="project-id"> <!-- For editing -->
-                    <input type="text" id="project-title" placeholder="Project Title" required>
-                    <textarea id="project-description" placeholder="Project Description" required></textarea>
-                    <input type="url" id="project-image-url" placeholder="Image URL" required>
-                    <button type="submit" class="btn">Save Project</button>
-                </form>
-            </div>
-
-            <!-- Projects List -->
-            <div class="projects-list-container">
-                <h3>Existing Projects</h3>
-                <div id="admin-projects-list">
-                    <!-- Projects will be listed here -->
+            <!-- Services Management Section -->
+            <section class="admin-section">
+                <h2>Manage Services</h2>
+                <div class="form-container">
+                    <h3>Add / Edit Service</h3>
+                    <form id="service-form" class="admin-form">
+                        <input type="hidden" id="service-id">
+                        <input type="text" id="service-title" placeholder="Service Title (e.g., Graphics Design)" required>
+                        <textarea id="service-description" placeholder="Service Description" required></textarea>
+                        <button type="submit" class="btn">Save Service</button>
+                    </form>
                 </div>
-            </div>
+                <div class="list-container">
+                    <h3>Existing Services</h3>
+                    <div id="admin-services-list">
+                        <!-- Services will be listed here by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Management Section -->
+            <section class="admin-section">
+                <h2>Manage Projects</h2>
+                <div class="form-container">
+                    <h3>Add / Edit Project</h3>
+                    <form id="project-form" class="admin-form">
+                        <input type="hidden" id="project-id">
+                        <input type="text" id="project-title" placeholder="Project Title" required>
+                        <textarea id="project-description" placeholder="Project Description" required></textarea>
+                        <input type="url" id="project-image-url" placeholder="Image URL" required>
+                        <select id="project-category" required>
+                            <option value="">-- Select a Category --</option>
+                            <!-- Categories from services will be loaded here by JS -->
+                        </select>
+                        <button type="submit" class="btn">Save Project</button>
+                    </form>
+                </div>
+                <div class="list-container">
+                    <h3>Existing Projects</h3>
+                    <div id="admin-projects-list">
+                        <!-- Projects will be listed here by JS -->
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
