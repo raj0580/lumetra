@@ -1,20 +1,24 @@
 /* FONT IMPORT */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-/* LUMETRA BRANDING & MODERN THEME */
+/* 
+  ==============================================
+  VIBRANT & COLORFUL LUMETRA THEME
+  ==============================================
+*/
 :root {
     --lumetra-blue: #4263EB;
     --lumetra-orange: #FF7A59;
-    --primary-color: var(--lumetra-blue);
-    --secondary-color: var(--lumetra-orange);
-    --dark-color: #121212;
+    --primary-gradient: linear-gradient(90deg, var(--lumetra-blue) 0%, #5A8DFF 100%);
+    --secondary-gradient: linear-gradient(90deg, var(--lumetra-orange) 0%, #FF9A8B 100%);
+    --dark-color: #121826;
     --light-color: #f8f9fa;
     --text-color: #343a40;
     --text-muted: #6c757d;
     --font-family: 'Poppins', sans-serif;
-    --border-radius: 12px;
+    --border-radius: 16px; /* Even softer corners */
     --shadow: 0px 8px 24px rgba(66, 99, 235, 0.08);
-    --shadow-hover: 0px 12px 28px rgba(66, 99, 235, 0.12);
+    --shadow-hover: 0px 12px 28px rgba(66, 99, 235, 0.15);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,94 +26,162 @@
 body {
     font-family: var(--font-family);
     line-height: 1.7;
-    background: #FFFFFF;
+    background-color: #FFFFFF;
     color: var(--text-color);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden; /* Prevent horizontal scroll from decorative elements */
+}
+
+/* Add a subtle decorative glow to the background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -20vh;
+    right: -20vw;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(66, 99, 235, 0.1), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
 }
 
 .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
 
 /* HEADER & FOOTER */
-header { background: #FFFFFF; padding: 1.5rem 0; border-bottom: 1px solid #dee2e6; position: sticky; top: 0; z-index: 100; }
+header { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); padding: 1.5rem 0; border-bottom: 1px solid #dee2e6; position: sticky; top: 0; z-index: 100; }
 header nav { display: flex; justify-content: space-between; align-items: center; }
-header .logo { font-size: 1.8rem; font-weight: 700; color: var(--dark-color); text-decoration: none; }
+header .logo { font-size: 1.8rem; font-weight: 800; color: var(--lumetra-blue); text-decoration: none; }
 header ul { list-style: none; display: flex; align-items: center; }
-header ul li a { padding: 0.5rem 1.25rem; text-decoration: none; color: var(--text-color); font-weight: 500; position: relative; transition: color 0.3s ease; }
-header ul li a:hover { color: var(--primary-color); }
+header ul li a { padding: 0.5rem 1.25rem; text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; }
+header ul li a:hover { color: var(--primary-gradient); }
 
-footer { background: var(--dark-color); color: var(--light-color); text-align: center; padding: 3rem 0; margin-top: 5rem; }
-footer .container { display: flex; justify-content: space-between; align-items: center; }
-footer .social-links a { color: var(--light-color); text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
+footer { background: var(--dark-color); color: var(--light-color); text-align: center; padding: 4rem 0; margin-top: 5rem; }
+footer .container { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
+footer .social-links a { color: var(--light-color); text-decoration: none; margin: 0 1rem; font-weight: 500; }
+
 
 /* GENERAL SECTIONS & TYPOGRAPHY */
-section { padding: 5rem 0; }
-section h2 { text-align: center; font-size: 2.8rem; font-weight: 700; margin-bottom: 3rem; color: var(--dark-color); }
+section { padding: 6rem 0; position: relative; }
+section h2 { text-align: center; font-size: 3rem; font-weight: 700; margin-bottom: 4rem; color: var(--dark-color); }
 .page-header { text-align: center; padding: 4rem 0; }
 .page-header h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; }
 .page-header p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-/* HERO SECTION - BRANDED */
-.hero-section { background: var(--light-color); text-align: center; padding: 7rem 0; }
-.hero-logo { font-size: 7rem; font-weight: 700; color: var(--lumetra-blue); line-height: 1; margin-bottom: 1rem; }
-.hero-section .tagline { font-size: 1.75rem; font-weight: 500; color: var(--lumetra-blue); }
+/* HERO SECTION - BOLD & BRANDED */
+.hero-section { background: var(--light-color); text-align: center; padding: 8rem 0; }
+.hero-logo { font-size: 8rem; font-weight: 800; color: var(--lumetra-blue); line-height: 1; margin-bottom: 1.5rem; }
+.hero-section .tagline { font-size: 2rem; font-weight: 500; color: var(--text-muted); }
 
-/* --- SERVICES & PROJECTS CARDS --- */
-.services-grid, .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+/*
+  ==============================================
+  VIBRANT, CLICKABLE SERVICE CARDS
+  ==============================================
+*/
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
 
-/* === NEW BRANDED SERVICE CARD === */
 .service-card {
-    display: block; /* Make it a block-level element for the link */
-    text-decoration: none; /* Remove underline from link */
+    display: block;
+    text-decoration: none;
     color: var(--dark-color);
     background: #FFFFFF;
     padding: 2.5rem;
     border-radius: var(--border-radius);
-    border: 2px solid transparent;
+    border: 1px solid #e9ecef;
     box-shadow: var(--shadow);
+    text-align: center;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-.service-card::before { /* The color accent */
+.service-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+    position: relative; /* For the gradient text effect */
+    z-index: 2;
+}
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 2;
+    transition: color 0.4s ease;
+}
+
+/* The magic gradient reveal on hover */
+.service-card::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg, var(--lumetra-blue), var(--lumetra-orange));
-    transition: height 0.3s ease;
+    right: 0;
+    bottom: 0;
+    background: var(--primary-gradient);
+    z-index: 1;
+    transform: translateY(101%); /* Start hidden at the bottom */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .service-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-12px);
     box-shadow: var(--shadow-hover);
 }
-.service-card:hover::before {
-    height: 10px; /* Accent grows on hover */
+.service-card:hover::after {
+    transform: translateY(0); /* Reveal the gradient */
 }
-.service-card h3 { margin-bottom: 1rem; font-size: 1.6rem; font-weight: 600; }
-.service-card p { font-size: 1rem; line-height: 1.6; color: var(--text-muted); }
+.service-card:hover h3,
+.service-card:hover p {
+    color: #FFFFFF; /* Make text white on hover */
+}
 
-/* Project Card Style */
+
+/* PROJECT CARDS */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
 .project-card { background: #FFFFFF; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
 .project-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
 .project-card-content { padding: 1.5rem; }
 .project-card-content h3 { margin-bottom: 0.5rem; font-weight: 600; }
 
-/* BUTTONS & FORMS */
-.btn { display: inline-block; padding: 1rem 2.5rem; background: var(--primary-color); color: #fff; border: none; border-radius: var(--border-radius); text-decoration: none; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease; }
-.btn:hover { background: #364FC7; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(66, 99, 235, 0.4); }
-.btn.btn-secondary { background: var(--secondary-color); }
-.btn.btn-secondary:hover { background: #F26449; box-shadow: 0 4px 12px rgba(255, 122, 89, 0.4); }
-.btn-danger { background-color: #e03131; }
-.btn-danger:hover { background-color: #c92a2a; box-shadow: 0 4px 12px rgba(224, 49, 49, 0.4); }
+/* === VIBRANT GRADIENT BUTTONS & CTA === */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(66, 99, 235, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(66, 99, 235, 0.4);
+}
 
-/* CTA Section */
-.cta-section { background: var(--dark-color); color: #fff; text-align: center; border-radius: var(--border-radius); margin: 0 auto; max-width: 1100px; }
+/* --- VIBRANT CTA SECTION --- */
+.cta-section {
+    padding: 6rem 2rem;
+    background: var(--primary-gradient);
+    color: #fff;
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin: 0 auto;
+    max-width: 1140px;
+}
 .cta-section h2 { color: #fff; }
+.cta-section .btn {
+    background: #FFFFFF;
+    color: var(--lumetra-blue);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
 
-/* === ADMIN PANEL STYLES === */
+/* === POLISHED ADMIN PANEL === */
 .admin-panel { padding: 2rem 0; }
 .admin-section { padding: 2.5rem; background: var(--light-color); border-radius: var(--border-radius); margin-bottom: 3rem; }
 .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 0 1rem;}
@@ -118,17 +190,16 @@ section h2 { text-align: center; font-size: 2.8rem; font-weight: 700; margin-bot
 .admin-form input:focus, .admin-form textarea:focus, .admin-form select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(66, 99, 235, 0.2); }
 .list-container { margin-top: 2rem; }
 .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #fff; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 1rem; }
-.admin-item button { margin-left: 0.5rem; padding: 0.5rem 1rem; }
+.admin-item button { margin-left: 0.5rem; padding: 0.5rem 1rem; border-radius: 8px;}
 .admin-item p { font-weight: 500; }
+.btn.btn-secondary { background: var(--secondary-gradient); }
+.btn-danger { background-color: #e03131; }
 
-/* ANIMATIONS & RESPONSIVE */
-.fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.fade-in-section.visible { opacity: 1; transform: translateY(0); }
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     header ul { display: none; }
-    .hero-logo { font-size: 4rem; }
+    .hero-logo { font-size: 4.5rem; }
     .hero-section .tagline { font-size: 1.25rem; }
     section h2 { font-size: 2.2rem; }
-    .services-grid, .projects-grid { grid-template-columns: 1fr; }
     footer .container { flex-direction: column; gap: 1.5rem; }
 }
