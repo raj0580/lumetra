@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumetra | Design. Launch. Grow.</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section fade-in-section">
+            <div class="container">
+                <h1>Lumetra</h1>
+                <p class="tagline">Design. Launch. Grow.</p>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section fade-in-section">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Graphics Design</h3>
+                        <p>Creating stunning visuals that define your brand's identity.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Website Development</h3>
+                        <p>Building fast, responsive, and modern websites for the best user experience.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Ads</h3>
+                        <p>Launching targeted ad campaigns that convert and grow your audience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section fade-in-section">
+            <div class="container">
+                <h2>Our Work</h2>
+                <div id="projects-grid" class="projects-grid">
+                    <!-- Projects from Firebase will be loaded here -->
+                    <p>Loading projects...</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section id="cta" class="cta-section fade-in-section">
+            <div class="container">
+                <h2>Have a project in mind?</h2>
+                <a href="contact.html" class="btn">Let's Talk</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    
+    <!-- Local JS Files -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/header-footer.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
