@@ -1,167 +1,53 @@
-/* FONT IMPORT */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+// This script handles functionality for the public-facing pages.
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- STORY GRID & PORTFOLIO GRID LOADING ---
+    const storyGrid = document.getElementById('story-grid');
+    const portfolioGrid = document.getElementById('portfolio-projects-grid');
 
-/* LUMETRA OFFICIAL DESIGN SYSTEM */
-:root {
-    --brand-blue: #2D6FE8;
-    --accent-orange: #FF7E41;
-    --accent-red: #FF4B5C;
-    --accent-gradient: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-orange) 100%);
-    --bg-light: #F8F9FB;
-    --text-dark: #1F2D3D;
-    --text-muted: #6C757D;
-    --highlight-warm: #FF6F61;
-    --font-family: 'Poppins', sans-serif;
-    --border-radius: 12px;
-    --shadow-soft: 0px 8px 24px rgba(31, 45, 61, 0.07);
-    --shadow-hover: 0px 12px 28px rgba(31, 45, 61, 0.1);
-}
+    const displayProjects = (gridElement, category = null) => {
+        if (!gridElement) return;
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+        getProjects(category).then(projects => {
+            if (projects.length === 0) {
+                gridElement.innerHTML = `<p style="color: var(--text-secondary); text-align: center;">No projects found. Check back soon!</p>`;
+                return;
+            }
+            gridElement.innerHTML = ''; // Clear loading
+            projects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card-story'; // Use the new class
+                projectCard.innerHTML = `
+                    <img src="${project.imageUrl}" alt="${project.title}">
+                    <div class="content">
+                        <span class="category">${project.category}</span>
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                    </div>
+                `;
+                gridElement.appendChild(projectCard);
+            });
+        }).catch(err => {
+            console.error("Error fetching projects:", err);
+            gridElement.innerHTML = `<p style="color: var(--text-secondary); text-align: center;">Could not load projects at this time.</p>`;
+        });
+    };
 
-body {
-    font-family: var(--font-family);
-    line-height: 1.7;
-    /* VIBRANT BACKGROUND GRADIENT */
-    background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-light) 100%);
-    color: var(--text-dark);
-    -webkit-font-smoothing: antialiased;
-}
+    // Load projects on homepage's story grid
+    displayProjects(storyGrid);
 
-.container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
-
-/* HEADER & FOOTER */
-header { background: var(--brand-blue); padding: 1.25rem 0; position: sticky; top: 0; z-index: 100; }
-header nav { display: flex; justify-content: space-between; align-items: center; }
-header .logo { font-size: 1.8rem; font-weight: 800; color: #FFFFFF; text-decoration: none; }
-header ul { list-style: none; display: flex; align-items: center; }
-header ul li a { padding: 0.5rem 1.25rem; text-decoration: none; color: rgba(255, 255, 255, 0.85); font-weight: 500; transition: color 0.3s ease; }
-header ul li a:hover { color: #FFFFFF; }
-
-footer { background: var(--text-dark); color: var(--bg-light); text-align: center; padding: 4rem 0; margin-top: 5rem; }
-footer .container { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; }
-footer .social-links a { color: var(--bg-light); text-decoration: none; margin: 0 1rem; font-weight: 500; }
-
-/* GENERAL SECTIONS & TYPOGRAPHY */
-section { padding: 5rem 0; }
-section h2 { text-align: center; font-size: 3rem; font-weight: 700; margin-bottom: 3.5rem; color: var(--text-dark); }
-.page-header { text-align: center; padding: 4rem 0; background: none; }
-.page-header h1 { font-size: 3.5rem; font-weight: 700; color: var(--text-dark); }
-.page-header p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-
-/* HERO SECTION */
-.hero-section { background: none; text-align: center; padding: 7rem 0; }
-.hero-logo { font-size: 7rem; font-weight: 800; color: var(--brand-blue); line-height: 1; margin-bottom: 1.5rem; }
-.hero-section .tagline { font-size: 1.75rem; font-weight: 500; color: var(--text-muted); }
-
-/* SERVICE CARDS */
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-.service-card { display: block; text-decoration: none; background: #FFFFFF; padding: 2.5rem; border-radius: var(--border-radius); border: 1px solid #EAECEF; box-shadow: var(--shadow-soft); text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
-.service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: var(--brand-blue); }
-.service-card::before { content: '★'; display: block; font-size: 1.5rem; width: 50px; height: 50px; line-height: 50px; text-align: center; background: var(--bg-light); color: var(--brand-blue); border-radius: 50%; margin-bottom: 1.5rem; }
-.service-card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-dark); }
-.service-card p { font-size: 1rem; line-height: 1.6; color: var(--text-muted); }
-
-/* CONTACT FORM */
-.contact-section { padding-top: 2rem; }
-.contact-form-container { max-width: 800px; margin: 0 auto; padding: 3rem; background: #FFFFFF; border-radius: var(--border-radius); box-shadow: var(--shadow-soft); }
-.contact-form { width: 100%; display: flex; flex-wrap: wrap; gap: 1.5rem; }
-.form-group { width: 100%; display: flex; flex-direction: column; }
-.form-group.half-width { width: calc(50% - 0.75rem); } /* Two columns */
-.form-group input, .form-group textarea { width: 100%; padding: 1rem; font-size: 1rem; font-family: var(--font-family); border: 1px solid #ced4da; border-radius: 8px; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(45, 111, 232, 0.2); }
-.form-group textarea { min-height: 150px; resize: vertical; }
-
-/* BUTTONS */
-.btn { display: inline-block; padding: 1rem 2.5rem; background: var(--accent-gradient); color: #fff; border: none; border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3); transition: transform 0.2s ease, box-shadow 0.3s ease; }
-.btn:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 8px 25px rgba(255, 111, 97, 0.4); }
-
-/* ABOUT PAGE & TEAM */
-.about-section p { font-size: 1.1rem; max-width: 800px; margin: 0 auto 3rem auto; text-align: center;}
-.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-.team-member { text-align: center; }
-.team-member img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; box-shadow: var(--shadow-soft); }
-.team-member h3 { font-size: 1.25rem; color: var(--text-dark); }
-.team-member p { color: var(--text-muted); }
-
-/*
-  ==============================================
-  ADMIN PANEL STYLES (FULL VERSION)
-  ==============================================
-*/
-.admin-panel { padding: 2rem 0; }
-.admin-section {
-    padding: 2.5rem;
-    background: #FFFFFF;
-    border-radius: var(--border-radius);
-    margin-bottom: 3rem;
-    box-shadow: var(--shadow-soft);
-}
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding: 0 1rem;
-}
-.admin-form {
-    max-width: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-.admin-form input,
-.admin-form textarea,
-.admin-form select {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    font-family: var(--font-family);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.admin-form input:focus,
-.admin-form textarea:focus,
-.admin-form select:focus {
-    outline: none;
-    border-color: var(--brand-blue);
-    box-shadow: 0 0 0 3px rgba(45, 111, 232, 0.2);
-}
-.list-container { margin-top: 2rem; }
-.admin-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background: var(--bg-light);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-.admin-item button {
-    margin-left: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-}
-.btn.btn-secondary {
-    background: var(--text-muted);
-    box-shadow: none;
-}
-.btn-danger {
-    background: #e03131;
-    box-shadow: none;
-}
-
-/* RESPONSIVE FIXES */
-@media (max-width: 768px) {
-    header ul { display: none; }
-    .hero-logo { font-size: 4.5rem; }
-    .hero-section .tagline { font-size: 1.25rem; }
-    section h2 { font-size: 2.2rem; }
-    .form-group.half-width { width: 100%; }
-}
+    // Load projects on the portfolio page (if on that page)
+    if (portfolioGrid) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        displayProjects(portfolioGrid, category);
+    }
+    
+    // --- FADE-IN ANIMATION ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in-section').forEach(section => observer.observe(section));
+});
